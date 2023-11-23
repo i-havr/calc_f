@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Calculator App",
     siteName: "Calculator App",
-    description: "Just use our convenient calculator",
+    description: "Just use this convenient calculator",
     type: "website",
     url: "https://calc-f.vercel.app/",
     locale: "en_US",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         alt: "Calculator image",
       },
     ],
-    description: "Just use our convenient calculator",
+    description: "Just use this convenient calculator",
   },
 };
 

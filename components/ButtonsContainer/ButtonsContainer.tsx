@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { Button } from "../Button/Button";
-import { keysAndButtonsData } from "@/data/keysAndButtonsData";
+import { keysAndButtonsData } from "@/data";
 
 import * as S from "./ButtonsContainer.styled";
 import { IButtonsContainer } from "./ButtonsContainer.props";

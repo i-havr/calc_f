@@ -1,4 +1,3 @@
-import { operators } from "@/constants";
 import { endWithOperator } from "@/helpers";
 
 export const normalizeSubmitData = (value: string): string => {
@@ -6,7 +5,7 @@ export const normalizeSubmitData = (value: string): string => {
 
   let normalizedString = "";
 
-  if (operators.some((operator) => trimmedValue.startsWith(operator))) {
+  if (["*", "/"].some((operator) => trimmedValue.startsWith(operator))) {
     normalizedString = 0 + trimmedValue;
   } else {
     normalizedString = trimmedValue;

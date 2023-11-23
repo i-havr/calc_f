@@ -5,7 +5,7 @@ import { FC, useState, useEffect, useCallback } from "react";
 import { DisplayInput } from "../DisplayInput/DisplayInput";
 import { ButtonsContainer } from "../ButtonsContainer/ButtonsContainer";
 
-import { keysAndButtonsData } from "@/data/keysAndButtonsData";
+import { keysAndButtonsData } from "@/data";
 import { normalizeSubmitData, endWithOperator } from "@/helpers";
 import { operators } from "@/constants";
 import { getCalculation } from "@/services";
@@ -21,19 +21,25 @@ export const CalculatorContainer: FC = () => {
     async (value: string): Promise<number | undefined> => {
       const normalizedString = normalizeSubmitData(value);
 
-      for (const segment of normalizedString) {
+      for (const segment of normalizedString.slice(1)) {
         if (operators.includes(segment)) {
           const operand1 = currentCalc
             ? currentCalc
-            : parseFloat(normalizedString.split(segment)[0]);
-          const operand2 = parseFloat(normalizedString.split(segment)[1]);
+            : parseFloat(
+                normalizedString.startsWith("-")
+                  ? "-" + normalizedString.slice(1).split(segment)[0]
+                  : normalizedString.split(segment)[0]
+              );
+          const operand2 = parseFloat(
+            normalizedString.slice(1).split(segment)[1]
+          );
 
           try {
             const result = await getCalculation(segment, operand1, operand2);
 
             setCurrentCalc(result);
 
-            const remainingString = value.replace(
+            const remainingString = normalizedString.replace(
               operand1 + segment + operand2,
               ""
             );
@@ -108,7 +114,7 @@ export const CalculatorContainer: FC = () => {
     const handleKeyPress = (event: KeyboardEvent) => {
       const key = event.key;
 
-      if (!isNaN(+key) || ["+", "-", "*", "/", "."].includes(key)) {
+      if (!isNaN(+key) || [...operators, "."].includes(key)) {
         const pressedKey = keysAndButtonsData.find((obj) => obj.key === key);
 
         changeInputValue(
