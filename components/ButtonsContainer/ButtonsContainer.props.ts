@@ -5,5 +5,4 @@ export interface IButtonsContainer {
     isResetBtn?: boolean,
     isEqualBtn?: boolean
   ) => void;
-  buttonAction: () => void;
 }

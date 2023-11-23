@@ -1,8 +1,7 @@
-import { endWithOperator } from ".";
+import { operators } from "@/constants";
+import { endWithOperator } from "@/helpers";
 
 export const calculateWhenOperatorIsRepeating = (value: string): boolean => {
-  const operators = ["+", "-", "*", "/"];
-
   return (
     !endWithOperator(value) &&
     operators.some((operator) => value.includes(operator))

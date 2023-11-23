@@ -1,15 +1,16 @@
-import { endWithOperator } from ".";
+import { operators } from "@/constants";
+import { endWithOperator } from "@/helpers";
 
 export const normalizeSubmitData = (value: string): string => {
-  const operators = ["+", "-", "*", "/"];
+  const trimmedValue = endWithOperator(value) ? value.slice(0, -1) : value;
 
-  const trimValue = endWithOperator(value) ? value.slice(0, -1) : value;
+  let normalizedString = "";
 
-  console.log("value in normalizeSubmitData", trimValue);
-
-  if (operators.some((operator) => trimValue.startsWith(operator))) {
-    return 0 + trimValue;
+  if (operators.some((operator) => trimmedValue.startsWith(operator))) {
+    normalizedString = 0 + trimmedValue;
+  } else {
+    normalizedString = trimmedValue;
   }
 
-  return trimValue;
+  return normalizedString;
 };

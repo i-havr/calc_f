@@ -3,7 +3,6 @@
 import styled from "@emotion/styled";
 
 export const Label = styled.label`
-  position: relative;
   display: block;
   margin-bottom: 40px;
 `;
@@ -19,12 +18,4 @@ export const DisplayInput = styled.input`
   text-align: right;
   color: #000e1a;
   pointer-events: none;
-`;
-
-export const CurrentCalc = styled.span`
-  position: absolute;
-  bottom: 6px;
-  right: 6px;
-  font-size: 12px;
-  color: gray;
 `;

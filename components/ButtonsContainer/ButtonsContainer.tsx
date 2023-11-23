@@ -1,13 +1,12 @@
 import { FC } from "react";
 
 import { Button } from "../Button/Button";
-import { buttonsData } from "@/data/buttonsData";
+import { keysAndButtonsData } from "@/data/keysAndButtonsData";
 
 import * as S from "./ButtonsContainer.styled";
 import { IButtonsContainer } from "./ButtonsContainer.props";
 
 export const ButtonsContainer: FC<IButtonsContainer> = ({
-  buttonAction,
   changeInputValue,
 }) => {
   return (
@@ -19,7 +18,7 @@ export const ButtonsContainer: FC<IButtonsContainer> = ({
         C
       </Button>
       <S.MainButtonsGrid>
-        {buttonsData.map((btn) => {
+        {keysAndButtonsData.map((btn) => {
           return (
             <li key={btn.children}>
               <Button
