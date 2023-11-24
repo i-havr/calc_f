@@ -6,7 +6,12 @@ import { DisplayInput } from "../DisplayInput/DisplayInput";
 import { ButtonsContainer } from "../ButtonsContainer/ButtonsContainer";
 
 import { keysAndButtonsData } from "@/data";
-import { normalizeSubmitData, endWithOperator } from "@/helpers";
+import {
+  normalizeSubmitData,
+  endWithOperator,
+  roundDisplayInput,
+  isDuplicationDots,
+} from "@/helpers";
 import { operators } from "@/constants";
 import { getCalculation } from "@/services";
 
@@ -66,7 +71,8 @@ export const CalculatorContainer: FC = () => {
       value: string,
       isOperator?: boolean,
       isResetBtn?: boolean,
-      isEqualBtn?: boolean
+      isEqualBtn?: boolean,
+      isDotBtn?: boolean
     ) => {
       if (isResetBtn) {
         setDisplayValue("0");
@@ -79,7 +85,9 @@ export const CalculatorContainer: FC = () => {
         const result = await submitDataToCalculate(displayValue);
 
         if (typeof result === "number") {
-          setDisplayValue(result.toString().substring(0, 12));
+          setDisplayValue(
+            roundDisplayInput(result.toString()).substring(0, 12)
+          );
         }
 
         setCurrentCalc(null);
@@ -93,8 +101,28 @@ export const CalculatorContainer: FC = () => {
           return value.substring(0, 12);
         }
 
+        if (endWithOperator(prev) && isDotBtn) {
+          setIsStart(false);
+          return prev + 0 + value;
+        }
+
+        if (isDuplicationDots(prev) && isDotBtn) {
+          console.log("IS DUPLICATION OF DOTS!");
+          setIsStart(false);
+          return prev;
+        }
+
+        if (prev.endsWith(value) && isDotBtn) {
+          setIsStart(false);
+          return prev;
+        }
+
         if (isOperator && endWithOperator(prev)) {
           return (prev.slice(0, -1) + value).substring(0, 12);
+        }
+
+        if (isOperator && prev.endsWith(".")) {
+          return prev.replace(".", "") + value;
         }
 
         if (isStart) {
@@ -121,12 +149,13 @@ export const CalculatorContainer: FC = () => {
           key,
           pressedKey?.className?.includes("operator"),
           false,
-          false
+          false,
+          pressedKey?.className?.includes("dot")
         );
       } else if (key === "Enter") {
-        changeInputValue(key, false, false, true);
+        changeInputValue(key, false, false, true, false);
       } else if (key === "Escape") {
-        changeInputValue(key, false, true, false);
+        changeInputValue(key, false, true, false, false);
       }
     };
 

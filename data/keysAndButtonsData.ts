@@ -16,7 +16,7 @@ export const keysAndButtonsData: IButton[] = [
   { children: "3", key: "3", className: "" },
   { children: "-", key: "-", className: "operator" },
 
-  { children: ".", key: ".", className: "" },
+  { children: ".", key: ".", className: "dot" },
   { children: "0", key: "0", className: "" },
   { children: "=", key: "Enter", className: "equal" },
   { children: "+", key: "+", className: "operator" },

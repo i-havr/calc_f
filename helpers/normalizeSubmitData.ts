@@ -5,7 +5,7 @@ export const normalizeSubmitData = (value: string): string => {
 
   let normalizedString = "";
 
-  if (["*", "/"].some((operator) => trimmedValue.startsWith(operator))) {
+  if (["*", "/", "."].some((operator) => trimmedValue.startsWith(operator))) {
     normalizedString = 0 + trimmedValue;
   } else {
     normalizedString = trimmedValue;

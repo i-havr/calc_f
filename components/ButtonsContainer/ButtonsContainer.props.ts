@@ -3,6 +3,7 @@ export interface IButtonsContainer {
     value: string,
     isOperator?: boolean,
     isResetBtn?: boolean,
-    isEqualBtn?: boolean
+    isEqualBtn?: boolean,
+    isDotBtn?: boolean
   ) => void;
 }

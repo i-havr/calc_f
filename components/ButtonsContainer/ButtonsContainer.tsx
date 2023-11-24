@@ -28,7 +28,8 @@ export const ButtonsContainer: FC<IButtonsContainer> = ({
                     btn.children,
                     btn.className?.includes("operator"),
                     false,
-                    btn.className?.includes("equal")
+                    btn.className?.includes("equal"),
+                    btn.className?.includes("dot")
                   )
                 }
               >
