@@ -107,7 +107,6 @@ export const CalculatorContainer: FC = () => {
         }
 
         if (isDuplicationDots(prev) && isDotBtn) {
-          console.log("IS DUPLICATION OF DOTS!");
           setIsStart(false);
           return prev;
         }
